@@ -42,16 +42,24 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <!--
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-    <script>io();</script>
-    -->
-    
+        <script>
+            var socket = io();
+
+            var form = document.getElementById('form');
+            var input = document.getElementById('input');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+            if (input.value) {
+                socket.emit('chat message', input.value);
+                input.value = '';
+            }
+         });
+        </script>
+        <input type="text" id="input" placeholder="Type your message..."></input>
+        <input id="form" type="submit" />
   </body>
-  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-    <script>
-      var socket = io();
-    </script>
 
 
 </html>
