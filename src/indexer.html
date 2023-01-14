@@ -1,50 +1,222 @@
 <!DOCTYPE html>
 <html>
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <script src="semantic/dist/semantic.min.js"></script>
+
+    <script type="text/javascript" src="https://livejs.com/live.js"></script>
+
   <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <title>Socket.IO chat</title>
     <style>
-      body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
 
-      #form { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); }
+
+      #clear {
+        position: relative;
+        left: 80px;
+        top: 0px;
+        background: Khaki; 
+        border-radius: 3px; 
+        border-style: none;
+      }
+
+
+
+      div {
+        margin: auto;
+        position: relative;
+        right: 0px;
+        top: 80px; 
+
+
+        width: 373px;
+        border-style: solid;
+        height: 500px;
+        border-radius: 12px;
+        overflow: scroll;
+
+      }
+
+      div div{
+        border-style: double;
+        position: relative;
+        left: 10px;
+        top: 5px;
+        height: 450px;
+        width: 350px;
+      }
+
+      #form { 
+        margin: auto;
+        position: relative;
+        left: 0px;
+        top: 40px;
+
+        background-color: dodgerblue;
+        padding: 0.25rem; 
+        width: 350px;
+        height: 3rem; 
+        display: flex; 
+        box-sizing: border-box; 
+        backdrop-filter: blur(10px); }
+
       #input { border: none; padding: 0 1rem; flex-grow: 1; border-radius: 2rem; margin: 0.25rem; }
       #input:focus { outline: none; }
-      #form > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
+      #form > button { 
+        background: Khaki; 
+        border: none; 
+        padding: 0 1rem; 
+        margin: 0.25rem; 
+        border-radius: 3px; 
+        outline: none; }
 
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages > li { padding: 0.5rem 1rem; }
-      #messages > li:nth-child(odd) { background: #efefef; }
+      #messages { 
+        list-style-type: none; 
+        margin: 0; 
+        padding: 0;
+
+    }
+      div h2{ 
+        background-color: dodgerblue;
+        margin: 5px;
+        border-radius: 6px;
+
+      }
+
+      div h2 button{ 
+        font-size: 5px;
+        position: relative;
+        left: 80px;
+        bottom: 10px;
+      }
+
+      #messages > li { 
+        overflow: scroll;
+        position: relative;
+
+        background-color: blue;
+        width: 250px;
+        padding: 0.5rem 1rem; 
+        border-style: solid;
+        border-radius: 12px;
+        margin: 5px;
+
+    }
+    #messages > li { 
+        position: relative;
+        left: 10px;
+        background-color: PaleTurquoise;
+        width: 250px;
+    
+    }
+
+    #messages > p { 
+        position: relative;
+        left: 75px;
+        background-color: Gainsboro;
+        width: 250px;
+        border-radius: 12px;
+        padding: 0.5rem 1rem; 
+    
+    }
+
+    #navbar {
+      border-style: ridge;
+      height: 47px;
+      text-align: right;
+      text-indent: 5px;
+      line-height: 15px;
+
+    }
+
+
+
+     /* #messages > li:nth-child(even) { 
+        left: 25px;
+        background-color: PaleTurquoise;
+    
+    }
+
+
+      #messages > li:nth-child(odd) { 
+        left: 75px;
+        background: Gainsboro; 
+
+    }
+    */
     </style>
+    <p id="navbar">
+      <a class="active" href="http://localhost:3000"><br>Exit Chat</a>
+    </p>
+
+
   </head>
   <body>
-    <ul id="messages"></ul>
+
+ 
+
+    <div>
+        <div id="messages">
+            <h2> &nbsp;<i class="glyphicon glyphicon-cloud"></i> Chat Room
+                <button id="clear"> Clear Chat</button>
+            </h2>
+        </div>
+    </div>
+
     <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Send</button>
+        <input id="input" autocomplete="off" /><button>  Send</button>
     </form>
   
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 
-        <script>
-          var socket = io();
-        
-          var messages = document.getElementById('messages');
-          var form = document.getElementById('form');
-          var input = document.getElementById('input');
-        
-          form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            if (input.value) {
-              socket.emit('chat message', input.value);
-              input.value = '';
-            }
-          });
-        
-          socket.on('chat message', function(msg) {
-            var item = document.createElement('li');
-            item.textContent = msg;
-            messages.appendChild(item);
-            window.scrollTo(0, document.body.scrollHeight);
-          });
-        </script>
+        <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+
+      var messages = document.getElementById('messages');
+      var form = document.getElementById('form');
+      var input = document.getElementById('input');
+      var clear = document.getElementById('clear');
+
+
+
+      clear.addEventListener('click', function() {
+        window.location.reload(false);
+      });
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (input.value) {
+          var final_message = input.value + ' ~ ' + socket.id
+          socket.emit('chat message', final_message);
+          input.value = '';
+        }
+
+
+      });
+
+      socket.on('chat message', function(msg) {
+        if (msg.includes(String(socket.id))) {
+          var item = document.createElement('li');
+          item.textContent = msg;
+          messages.appendChild(item);
+          window.scrollTo(0, document.body.scrollHeight);
+        } else {
+          var item = document.createElement('p');
+          item.textContent = msg;
+          messages.appendChild(item);
+          window.scrollTo(0, document.body.scrollHeight);
+        }
+        //console.log(msg.includes(String(socket.id)))
+      
+      });
+    </script>
+
+
   
   </body>
 </html>
