@@ -9,7 +9,7 @@ const Navbar = () => {
             </div>
 
             <div className='item'>
-                <Link to='/Chatbot'> Temp-link: chatbot page </Link>
+                <a href='http://localhost:3001'> Temp-link: chatbot page </a>
             </div>
 
             <div className='menu right' style={{marginTop:'5px'}}>
