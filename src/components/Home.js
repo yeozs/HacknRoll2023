@@ -8,6 +8,8 @@ const Home = () => {
             <p> Welcome to Hack Chat!</p>
             <p> Created By: Gambe and Zuosheng</p>
 
+        
+
         </div>
     )
 

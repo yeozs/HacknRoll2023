@@ -8,10 +8,11 @@
     <script src="semantic/dist/semantic.min.js"></script>
 
     <script type="text/javascript" src="https://livejs.com/live.js"></script>
+    
 
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <title>Socket.IO chat</title>
+    <title>Hack Chat</title>
     <style>
 
 
@@ -135,6 +136,8 @@
 
 
 
+
+
      /* #messages > li:nth-child(even) { 
         left: 25px;
         background-color: PaleTurquoise;
@@ -153,6 +156,11 @@
       <a class="active" href="http://localhost:3000"><br>Exit Chat</a>
     </p>
 
+    
+  
+
+
+
 
   </head>
   <body>
@@ -166,6 +174,7 @@
             </h2>
         </div>
     </div>
+    <p id="google_translate_element"></p>
 
     <form id="form" action="">
         <input id="input" autocomplete="off" /><button>  Send</button>
@@ -175,12 +184,15 @@
 
         <script src="/socket.io/socket.io.js"></script>
     <script>
+
+
       var socket = io();
 
       var messages = document.getElementById('messages');
       var form = document.getElementById('form');
       var input = document.getElementById('input');
       var clear = document.getElementById('clear');
+      var myText
 
 
 
@@ -193,6 +205,7 @@
         if (input.value) {
           var final_message = input.value + ' ~ ' + socket.id
           socket.emit('chat message', final_message);
+          myText = input.value
           input.value = '';
         }
 
@@ -200,6 +213,10 @@
       });
 
       socket.on('chat message', function(msg) {
+        console.log(myText)
+
+
+
         if (msg.includes(String(socket.id))) {
           var item = document.createElement('li');
           item.textContent = msg;
@@ -215,6 +232,8 @@
       
       });
     </script>
+
+
 
 
   
