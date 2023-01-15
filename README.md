@@ -1,5 +1,5 @@
-Live Chat Room
-# Reason for Project Creation: Hackathon Competition
+# Live Chat Room
+Reason for Project Creation: Hackathon Competition
 - Makes use of React, Javascript, HTML, CSS, Socket IO Features
 
 How to use the application:
