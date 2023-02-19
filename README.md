@@ -11,7 +11,7 @@ How to use the application:
 
 
 Drawbacks:
-- Application has React background with vanilla Javascript Code. Better maintenability of code needed.
+- Application has React background with vanilla Javascript Code. Better maintainability of code needed.
 
 
 
